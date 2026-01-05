@@ -1,0 +1,31 @@
+/* Footer */
+.footer {
+  background: #dc3545;
+  color: #ffffff;
+  padding: 1rem;
+  border-top: 1px solid #c82333;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-container p {
+  margin: 0;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .footer {
+    padding: 1.25rem;
+  }
+
+  .footer-container p {
+    font-size: 0.95rem;
+  }
+}
