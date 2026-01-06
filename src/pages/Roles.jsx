@@ -11,7 +11,7 @@ const Roles = () => {
   const [error, setError] = useState(null);
   const [formVisible, setFormVisible] = useState(false);
   const [editingRole, setEditingRole] = useState(null);
-  const emptyForm = { name: '', descripcion: '', guard_name: 'api' };
+  const emptyForm = { name: '', descripcion: '' };
   const [formData, setFormData] = useState(emptyForm);
   const [formError, setFormError] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -52,7 +52,6 @@ const Roles = () => {
       setFormData({
         name: role.name || role.nombre || '',
         descripcion: role.descripcion || role.description || '',
-        guard_name: role.guard_name || 'api',
       });
     } else {
       setEditingRole(null);
@@ -82,7 +81,7 @@ const Roles = () => {
       const payload = {
         name: formData.name.trim(),
         descripcion: formData.descripcion.trim() || null,
-        guard_name: formData.guard_name.trim() || 'api',
+        guard_name: editingRole?.guard_name || 'api',
       };
       if (editingRole) {
         await updateRole(editingRole.id, payload);
@@ -154,10 +153,6 @@ const Roles = () => {
                 <label htmlFor="name">Nombre</label>
                 <input id="name" name="name" value={formData.name} onChange={handleChange} required />
               </div>
-              <div className="crud-field">
-                <label htmlFor="guard_name">Guard</label>
-                <input id="guard_name" name="guard_name" value={formData.guard_name} onChange={handleChange} />
-              </div>
             </div>
             <div className="crud-field">
               <label htmlFor="descripcion">Descripción</label>
@@ -190,7 +185,6 @@ const Roles = () => {
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Guard</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -200,9 +194,6 @@ const Roles = () => {
                   <td className="text-muted">{role.id}</td>
                   <td><strong>{role.name || role.nombre || '—'}</strong></td>
                   <td>{role.descripcion || role.description || '—'}</td>
-                  <td>
-                    <span className="badge badge-primary">{role.guard_name || 'api'}</span>
-                  </td>
                   <td>
                     <div className="action-buttons">
                       <button className="btn btn-secondary btn-sm" onClick={() => openForm(role)}>
